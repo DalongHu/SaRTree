@@ -9,7 +9,7 @@
 
 1 At present, a huge amount of phylogenetic analysis are published in variant areas. However, very few phylogenetic trees could be fellow because, normally, it is impossible to provide evolutionary events on branches of trees.
 
-2 A very normal question is that when getting one or some new strains' sequences of a species with published phylogenetic analysis, how to add it to existing or published phylogenetic tree to get the phylogenetic information of new strains? 
+2 A very normal question is that when getting one or some new strains' sequences of a species with published phylogenetic analysis, how to add it to existing or published phylogenetic tree to get the phylogenetic information of new strains?
 
 Due to different sequencing platforms, different sequencing qualities, different sequencing libraries, different assembly softwares with different parameters, different mapping methods with different parameters, different phylogenetic analysis methods/models/softwares/parameters and so many other differences on situations or research methods when doing phylogenetic analysis, it is always impossible and of course very non-convenient to rebuild published trees. Sometimes, it is hard to keep the original structure of a published tree after adding new samples, especially for new strains which have only draft genome or low quality sequences. And sometimes, it is even very difficult to rebuild a published tree using the original samples' sequences. 
 
@@ -124,7 +124,7 @@ make a directory named "mauve"(without the quotes) in the working directory (tem
 put all raw samples' sequences (fasta format, use "strainname".fna as the format of file name, e.g. ZJ06.fna) into the directory
 
     for "formatted" model, (not recommended, just for test) put SaRTree format snp list file (a tab separated file named as "tag".list,the "tag" should be same as the one using for the -t option, with the format:
-    
+
     location	ref	-s1-	-s2-	...
 
     1234	A	T	T	...
@@ -134,13 +134,13 @@ put all raw samples' sequences (fasta format, use "strainname".fna as the format
     ) and the name list file (tab separated txt file, with format:
 
     ref	AB0057
-    
+
     -s1-	ZJ06
-    
+
     -s2-	...
-    
+
     ...
-    
+
     ) into working directory
 
     for "root" model,
@@ -165,7 +165,7 @@ use the same commond as the first run and add -d to indicate the isolation dates
 3. choose a model which depends on the input files("standard" for mauve result, "raw" for raw sequence data, "formatted" for SaRTree format mapping or snp list)
 
 
-    the details of models are similar to the "SaRTree core" section above, but NOTE that all the input files should be put into "work dir"query/seq ("raw" model), "work dir"/query/mauve ("standard" model)or "work dir"/query/ ("formatted" model) 
+    the details of models are similar to the "SaRTree core" section above, but NOTE that all the input files should be put into "work dir"query/seq ("raw" model), "work dir"/query/mauve ("standard" model)or "work dir"/query/ ("formatted" model)
 Adding a "query" directory separately is to make it possible to run SaRTree core and StrainLocater in the same working directory conveniently
 
 
@@ -211,7 +211,7 @@ a small script to show a tree on commond line text interface, for details, pleas
 	-filter/-e [off/rec/multi/both/either]	optional, filter out SNPs with low confidence, "off" indicates close this function;"rec" mode deletes SNPs covered by recombination regions ignroing recombinant SNPs' distribution;"multi" mode deletes SNPs presenting more than two types of bases;"both" mode deletes only SNPs fitting both detected by "rec" and "multi" modes;"either" mode deletes SNPs fitting all SNPs fitting either "rec" and "multi" modes. default "off"
 
 	-config/-p [string]  optional, a config file with parameters, please use '-' or leave the line out to indicate a default or unavailble parameter. See the config.template.txt in the SaRTree folder for details. When using the config file, all parameters in the file will cover any other input parameters including the commond line input and any default.
-	
+
 	-thread/-a [integer]  optional, number of threads to use in multi-threads model.
 
 	-help/-h  optional, show this usage
@@ -225,27 +225,27 @@ a small script to show a tree on commond line text interface, for details, pleas
 
 After finishing all the process of the main script, all the meaningful output files will be put in a directory named "result" which is built automatically in the working directory. The files in "tmp" directory are temporary files which are used to trace back to find bugs, recommend to delete the directory after checking all the result.
 
-The information within the files are as below: 
+The information within the files are as below:
 (will rename all the output files in formal version to make them more reasonable)
 
 ###==============SaRTree==============
 
-    example/result/*.name.nwk: when using RAxML to build the phylogenetic tree, this is a newick format tree file with the original branch length and bootstrap re sult based on the mutation events
-    example/result/*.event.name.nex: the tree with all evolutionary events located on branches in nexus format, "events" section of each branch shows the located events, using the format "_ _(number of mutations)_ _(number of recombinations)_ _(number of indels)_ _", which are easy to show by a third party software FigTree using its "node bar" or "branch bar" function.
-    example/result/*.date.nex: created when -b used, nexus format tree file with divergence dates as branches lengths when BEAST is using, for more detail of it, please see documents of BEAST, and to show the data, a third party software FigTree is recommended. 
+    example/result/<tag>.name.nwk: when using RAxML to build the phylogenetic tree, this is a newick format tree file with the original branch length and bootstrap re sult based on the mutation events
+    example/result/<tag>.event.name.nex: the tree with all evolutionary events located on branches in nexus format, "events" section of each branch shows the located events, using the format "__(number of mutations)__(number of recombinations)__(number of indels)__", which are easy to show by a third party software FigTree using its "node bar" or "branch bar" function.
+    example/result/<tag>.date.nex: created when -b used, nexus format tree file with divergence dates as branches lengths when BEAST is using, for more detail of it, please see documents of BEAST, and to show the data, a third party software FigTree is recommended.
     example/result/branch.xls: a summary of all evolutionary events and other information of each branch
     example/result/branch.xls.pattern2branch.xls: correspondence between pattern type and branch index
-    example/result/*.snp.final.xls: a summary of all mutation events' information including branches located, annotation and brief profiles
-    example/result/*.rec.final.xls: a summary of all recombination events' information including branches located, annotation and brief profiles
-    example/result/*.indel.final.xls: created when "raw" or "standard" model used, a summary of all indel events' information including lengths of sequences of each sample at the indel regions, branches located, annotation and brief profiles
-    example/result/*.indel.seq.name.xls: created when "raw" or "standard" model used, a summary of all indel events' sequences of each sample at the indel region.
+    example/result/<tag>.snp.final.xls: a summary of all mutation events' information including branches located, annotation and brief profiles
+    example/result/<tag>.rec.final.xls: a summary of all recombination events' information including branches located, annotation and brief profiles
+    example/result/<tag>.indel.final.xls: created when "raw" or "standard" model used, a summary of all indel events' information including lengths of sequences of each sample at the indel regions, branches located, annotation and brief profiles
+    example/result/<tag>.indel.seq.name.xls: created when "raw" or "standard" model used, a summary of all indel events' sequences of each sample at the indel region.
 
 ###==============StrainLocater==============
 
-    example/query/result/*.nodes.txt: description of each indexed node
-    example/query/result/*.ourOfTree.txt: the strains without good enough location on the tree are excluded out of the result
-    example/query/result/*.onTree.txt: a summary of the strains could be located on the target tree and their locations
-    example/query/result/*.tree.nex: a nexus tree file with information of new strains' locations, "located" section of each branch shows the located strains, which could be showed by third party software FigTree using "node bar" or "branch bar" function.
+    example/query/result/<tag>.nodes.txt: description of each indexed node
+    example/query/result/<tag>.ourOfTree.txt: the strains without good enough location on the tree are excluded out of the result
+    example/query/result/<tag>.onTree.txt: a summary of the strains could be located on the target tree and their locations
+    example/query/result/<tag>.tree.nex: a nexus tree file with information of new strains' locations, "located" section of each branch shows the located strains, which could be showed by third party software FigTree using "node bar" or "branch bar" function.
 ------------------------------------------
 
 ##Example:
@@ -259,8 +259,8 @@ A set of Acinetobacter baumannii genomes is included as an example in the "examp
 	example/ACICU.fna	:reference genome sequence file
 	example/ACICU.gff	:reference genome annotation file
 	example/date.txt	:(for BEAST, USELESS in this version)2-column tab-separated text file with isolation dates information
-	example/seq/*.fna	:all the other strains' complete genome sequence files for SaRTree core
-	example/query/seq/*.fna	:all the query strains' draft genome sequence files for StrainLocater
+	example/seq/<name>.fna	:all the other strains' complete genome sequence files for SaRTree core
+	example/query/seq/<name>.fna	:all the query strains' draft genome sequence files for StrainLocater
 
 ###==============example commands==============
 
@@ -317,6 +317,3 @@ With only a config file indicating all usefull parameters, SaRTree could be repe
 8. supporting for step-wise running, so that user could run BEAST, RAxML and other third party softwares independently
 9. trouble shooting and input/output checking
 ------------------------------------------
-
-
-
