@@ -1,0 +1,9 @@
+mauveBin	/usr/bin/progressiveMauve
+mauveConfig	-
+raxMLBin	/usr/bin/raxmlHPC
+raxMLConfig	-p 12345 -# 100 -m GTRGAMMA
+raxMLBootstrap	-x 12345 -N 100
+beastBin	/usr/bin/beast-mcmc
+beastConfig	-working -beagle_off
+treeAnnotatorConfig	-heights mean -burnin 100 -limit 0.5
+recDetectArg	-t -x 40000
