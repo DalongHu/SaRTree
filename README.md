@@ -9,9 +9,9 @@
 
 1 At present, a huge amount of phylogenetic analysis are published in variant areas. However, very few phylogenetic trees could be fellow because, normally, it is impossible to provide evolutionary events on branches of trees.
 
-2 A very normal question is that when getting one or some new strains鈥?sequences of a species with published phylogenetic analysis, how to add it to existing or published phylogenetic tree to get the phylogenetic information of new strains? 
+2 A very normal question is that when getting one or some new strains' sequences of a species with published phylogenetic analysis, how to add it to existing or published phylogenetic tree to get the phylogenetic information of new strains? 
 
-Due to different sequencing platforms, different sequencing qualities, different sequencing libraries, different assembly softwares with different parameters, different mapping methods with different parameters, different phylogenetic analysis methods/models/softwares/parameters鈥?and so many other differences on situations or research methods when doing phylogenetic analysis, it is always impossible and of course very non-convenient to rebuild published trees. Sometimes, it is hard to keep the original structure of a published tree after adding new samples, especially for new strains which have only draft genome or low quality sequences. And sometimes, it is even very difficult to rebuild a published tree using the original samples' sequences. 
+Due to different sequencing platforms, different sequencing qualities, different sequencing libraries, different assembly softwares with different parameters, different mapping methods with different parameters, different phylogenetic analysis methods/models/softwares/parameters and so many other differences on situations or research methods when doing phylogenetic analysis, it is always impossible and of course very non-convenient to rebuild published trees. Sometimes, it is hard to keep the original structure of a published tree after adding new samples, especially for new strains which have only draft genome or low quality sequences. And sometimes, it is even very difficult to rebuild a published tree using the original samples' sequences. 
 
 It is back to the question 1, normally published trees are hard or maybe impossible to use or compare.
 
@@ -23,7 +23,7 @@ It is back to the question 1, normally published trees are hard or maybe impossi
 
 1 First, the main idea of SaRTree is to get detailed evolutionary events on each branch of a tree, so that comparing with the events, new samples could be located on the existing tree.
 
-2 By a statistics method, recombination events could be detected by RecDetect so that it is possible to get 鈥渞eally鈥?mutational SNPs for further analysis and, as a result, high resolution phylogenetic reconstruction and divergence time estimation could be possibly implemented.
+2 By a statistics method, recombination events could be detected by RecDetect so that it is possible to get really mutational SNPs for further analysis and, as a result, high resolution phylogenetic reconstruction and divergence time estimation could be possibly implemented.
 
 3 Any third-part software should be use for assembly, alignment, mapping, tree building, divergence date estimating etc. It gives user more freedom to fit different complex situations. SaRTree only provide a platform or pipeline with necessary programs to finish the same thing with different method. Of course, we have recommended software list, but it is hard to say they are good for all situations.
 
