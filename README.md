@@ -94,6 +94,7 @@ Please add channles "conda-forge", "defaults" ,"r", "bioconda" and "esteinig" by
 **Please run script "install.pl" to get the perl Modules by cpan while your may need to provide root permission to install some of them (try "sudo perl install.pl" if there is a "permission denied" error occured) and set up the path to dependencies software.**
 
 ###==============Optional============== (please revise the paths and parameters of them in the configure file "Config")
+
 1.bwa/bowtie (not supported now, will add them in the next version)
 2.BEAST v1.8.4 (not support BEAST 2 now, will fix in the next version)
 3.FigTree (any version, for tree viewing)
@@ -221,12 +222,14 @@ a small script to show a tree on commond line text interface, for details, pleas
 
 ##Output Interpretation:
 ------------------------------------------
+
 After finishing all the process of the main script, all the meaningful output files will be put in a directory named "result" which is built automatically in the working directory. The files in "tmp" directory are temporary files which are used to trace back to find bugs, recommend to delete the directory after checking all the result.
 
 The information within the files are as below: 
 (will rename all the output files in formal version to make them more reasonable)
 
 ###==============SaRTree==============
+
     example/result/*.name.nwk: when using RAxML to build the phylogenetic tree, this is a newick format tree file with the original branch length and bootstrap re sult based on the mutation events
     example/result/*.event.name.nex: the tree with all evolutionary events located on branches in nexus format, "events" section of each branch shows the located events, using the format "_ _(number of mutations)_ _(number of recombinations)_ _(number of indels)_ _", which are easy to show by a third party software FigTree using its "node bar" or "branch bar" function.
     example/result/*.date.nex: created when -b used, nexus format tree file with divergence dates as branches lengths when BEAST is using, for more detail of it, please see documents of BEAST, and to show the data, a third party software FigTree is recommended. 
@@ -238,6 +241,7 @@ The information within the files are as below:
     example/result/*.indel.seq.name.xls: created when "raw" or "standard" model used, a summary of all indel events' sequences of each sample at the indel region.
 
 ###==============StrainLocater==============
+
     example/query/result/*.nodes.txt: description of each indexed node
     example/query/result/*.ourOfTree.txt: the strains without good enough location on the tree are excluded out of the result
     example/query/result/*.onTree.txt: a summary of the strains could be located on the target tree and their locations
@@ -251,6 +255,7 @@ A set of Acinetobacter baumannii genomes is included as an example in the "examp
 **The script "example.sh" includes all the basic commands to run this example, could just try "sh example.sh" to test.**
 
 ###==============input files details==============
+
 	example/ACICU.fna	:reference genome sequence file
 	example/ACICU.gff	:reference genome annotation file
 	example/date.txt	:(for BEAST, USELESS in this version)2-column tab-separated text file with isolation dates information
@@ -258,6 +263,7 @@ A set of Acinetobacter baumannii genomes is included as an example in the "examp
 	example/query/seq/*.fna	:all the query strains' draft genome sequence files for StrainLocater
 
 ###==============example commands==============
+
     cd /home/user/SaRTree-v1.0
     perl SaRTree.pl -i /home/user/SaRTree-v1.0/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -o 307-0294
     perl SaRTree.pl -l -i /home/user/SaRTree-v1.0/example/ -t test -f example/ACICU.fna -u example/result/test.name.nwk -s example/result/test.snp.final.xls -m raw
@@ -267,6 +273,7 @@ After all processes finished, all output files for SaRTree core should be found 
 ------------------------------------------
 
 ###==============example for manually rooting==============
+
     cd /home/user/SaRTree-v1.0
     perl SaRTree.pl -i /home/user/SaRTree-v1.0/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -r man
 
@@ -279,6 +286,7 @@ Then will go on the following steps. The "beast" model is similar.
 ------------------------------------------
 
 ###==============example config==============
+
     cd /home/user/SaRTree-v1.0
     perl SaRTree.pl -p example/test.config.txt
 
@@ -288,6 +296,7 @@ With only a config file indicating all usefull parameters, SaRTree could be repe
 
 ##Other Notices:
 ------------------------------------------
+
 1. For tree painting, SaRTree is not focusing on this part, only provide a small script named treeview.pl to show phylogenetic tree on commond line text interface. All the useful information within a tree is included in nexus format tree files. User could choose any tree-viewing software or user's own scripts which could open nexus format files to visualize the output data. It is recommended to use a third party software "FigTree" <http://tree.bio.ed.ac.uk/software/figtree/> to show the information.
 2. Due to the complexity of the parameters of BEAST, it is recommended to run BEAST independently.
 3. It is also recommended to run MAUVE independently by user.
@@ -297,6 +306,7 @@ With only a config file indicating all usefull parameters, SaRTree could be repe
 
 ##Things Coming in Next Version:
 ------------------------------------------
+
 1. supporting for more recombination-event-detecting software
 2. supporting for mapping software and result input
 3. supporting for multi chromosomes
