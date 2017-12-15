@@ -71,7 +71,13 @@ Ubuntu users:
 Please try **'sudo cpan -i FindBin Getopt::Long Bio::SeqIO Bio::TreeIO Bio::AlignIO'** to install perl packages and try **'sudo apt-get install mauve-aligner raxml beast-mcmc'** to install third-party software.
 
 Conda users:
-Please add channles "conda-forge", "defaults" ,"r", "bioconda" and "esteinig" by **'conda config --add channels <channels name>'**. And then create a running environment with dependencies installing by **'conda create -y --name env_sartree perl perl-yaml-libyaml perl-bioperl perl-findbin perl-getopt-long raxml mauve beast'**. Then run **'source activate env_sartree'** to access SaRTree environment and run SaRTree.
+Please add channels "conda-forge", "defaults" ,"r", "bioconda" and "esteinig" by 
+	**'conda config --add channels conda-forge r bioconda esteinig'**
+And then create a running environment with dependencies installing by 
+	**'conda create -y --name env_sartree perl perl-yaml-libyaml perl-bioperl perl-findbin perl-getopt-long raxml mauve beast'**
+Then run 
+	**'source activate env_sartree'** 
+to access SaRTree environment and run SaRTree.
 
 ------------------------------------------
 
