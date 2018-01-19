@@ -180,7 +180,7 @@ Adding a "query" directory separately is to make it possible to run SaRTree core
 
 4. run the main script: (indicating newick format target tree file and SaRTree format, see the "formatted" model section, snp list file for the tree)
 
-    perl SaRTree.pl [options] -l -i &lt;work dir> -t &lt;output tag> -r &lt;ref sequence(fna)> -u &lt;target tree(nwk)> -s &lt;snp list(SaRTree format)> -m &lt;standard/raw/formatted>
+    perl SaRTree.pl [options] -l -i &lt;work dir> -t &lt;output tag> -f &lt;ref sequence(fna)> -u &lt;target tree(nwk)> -s &lt;snp list(SaRTree format)> -m &lt;standard/raw/formatted>
 
 ###==============treeview.pl==============
 
