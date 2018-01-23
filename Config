@@ -6,4 +6,4 @@ raxMLBootstrap	-x 12345 -N 100
 beastBin	beast-mcmc
 beastConfig	-working -beagle_off
 treeAnnotatorConfig	-heights mean -burnin 100 -limit 0.5
-recDetectArg	-t -x 40000
+recDetectArg	-x 2000
