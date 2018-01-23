@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-print "Installing SaRTree v0.8.3..\n";
+print "Installing SaRTree v1.1..\n";
 #perl modules
 print "Checking perl Packages..\n";
 use File::Find;
