@@ -1,70 +1,42 @@
 ------------
 ##SaRTree v1.2
 ------------
-
-##Description:
-------------------------------------------
-
-###==============Main problems to solve==============
-
-1 At present, a huge amount of phylogenetic analysis are published in variant areas. However, very few phylogenetic trees could be fellow because, normally, it is impossible to provide evolutionary events on branches of trees.
-
-2 A very normal question is that when getting one or some new strains' sequences of a species with published phylogenetic analysis, how to add it to existing or published phylogenetic tree to get the phylogenetic information of new strains?
-
-Due to different sequencing platforms, different sequencing qualities, different sequencing libraries, different assembly softwares with different parameters, different mapping methods with different parameters, different phylogenetic analysis methods/models/softwares/parameters and so many other differences on situations or research methods when doing phylogenetic analysis, it is always impossible and of course very non-convenient to rebuild published trees. Sometimes, it is hard to keep the original structure of a published tree after adding new samples, especially for new strains which have only draft genome or low quality sequences. And sometimes, it is even very difficult to rebuild a published tree using the original samples' sequences. 
-
-It is back to the question 1, normally published trees are hard or maybe impossible to use or compare.
-
-3 Is it possible to build a "tracable" phylogenetic tree database to make it easy to get phylogenetic locations of new samples?
-
-4 How to know what happened on the branches of a tree? Sometimes, information of branches鈥?length are not enough for phylogenetic analysis, detailed evolutionary information may reveal more functional issues.
-
-###==============SaRTree: A pipeline to solve the problems above==============
-
-1 First, the main idea of SaRTree is to get detailed evolutionary events on each branch of a tree, so that comparing with the events, new samples could be located on the existing tree.
-
-2 By a statistics method, recombination events could be detected by RecDetect so that it is possible to get really mutational SNPs for further analysis and, as a result, high resolution phylogenetic reconstruction and divergence time estimation could be possibly implemented.
-
-3 Any third-part software should be use for assembly, alignment, mapping, tree building, divergence date estimating etc. It gives user more freedom to fit different complex situations. SaRTree only provide a platform or pipeline with necessary programs to finish the same thing with different method. Of course, we have recommended software list, but it is hard to say they are good for all situations.
-
-4 Using a simple algorithm in StrainLocater, new samples with variant backgrounds could be located to existing tree with SaRTree output files or same format files. It is very fast and convenient to use an existing tree and then the "tracable tree database" project could start and be possible to use.
-
+An ideal bacterial phylogenetic tree accurately retraces evolutionary history and accurately incorporates mutational, recombination and other events on the appropriate branches. Current strain-level bacterial phylogenetic analysis based on large numbers of genomes lacks reliability and resolution, and is hard to be replicated, confirmed and reused, because of the highly divergent nature of microbial gemomes. We present SaRTree, a pipeline using six “living trees” modules, that addresses problems arising from the high numbers and variable quality of bacterial genome sequences. It provides for reuse of the tree and offers a major step towards global standardization of phylogenetic analysis by generating deposit files including all steps involved in phylogenetic inference. The tree itself is a “living tree” that can be extended by addition of more sequences, or the deposit can be used to vary the programs or parameters used, to assess the effect of such changes. This approach will allow phylogeny papers to meet the traditional responsibility of providing data and analysis that can be repeated and critically evaluated by others. SaRTree is designed for prokaryote strain-level analysis but could be adapted for other usage. 
 ------------------------------------------
 
 ##Version & License:
 ------------------------------------------
 SaRTree is for locating evolutionary events onto phylogenetic trees or building high resolution trees based on mutation events, StrainLocater is for locating new strains onto existing trees.
 
-Please note that this is a debug test version v1.2, so not all of the functions work well now and many parts of the codes run slowly and redundantly.
+Please note that this is the early stage release version v1.2, so not all of the functions work well now and many parts of the codes run slowly and redundantly.
 
 There is no warranties coming with SaRTree, so that users must be responsible for the results generated by SaRTree.
 
 This is a free software following GNU General Public License <http://www.gnu.org/licenses/gpl.html>. The license file is also included in this package.
 
-Copyright and Contact: Dalong Hu, University of Sydney (dalong.hu@sydney.edu.au) Jan-2018
+Copyright and Contact: Dalong Hu, University of Sydney (dahu0504@uni.sydney.edu.au) Oct-2019
 
 ------------------------------------------
 
 ##Citation:
 ------------------------------------------
-The paper hasn't published, please wait...
-
+Dalong Hu, Bin Liu, Lei Wang* and Peter R. Reeves* (2019). Living Trees: High Quality Reproducible and Reusable Construction of Bacterial Phylogenetic Trees. Molecular Biology and Evolution. (will be online soon)
 ------------------------------------------
 
-##Install:
+##Installation:
 ------------------------------------------
-SaRTree is wrote by perl, it is no need to install it. Just unzip the package and put the directory to anywhere you want and install all dependencies before using. **After installed all dependencies, please revise the parameters in "Config" file to setup default settings for third-party software.**
+SaRTree is written in perl, so normaly it is no need to install it. To use SaRTree, uncompress the release package and then install all dependencies before using. **After installed all dependencies, please revise the path of them and parameters in "Config" file to setup default settings for those third-party software.**
 
 ###Dependencies Install:
 
 ####Conda users:
-Please run **'sh install-conda.sh'** to install all the dependencies automatically. Then a environment called **'env_sartree'** will be created and please use **'source activate env_sartree'** to access and run SaRTree.
+Please run **'sh install-conda.sh'** to install all the dependencies automatically. Then an environment called **'env_sartree'** will be created and please use **'source activate env_sartree'** to start the environment before running SaRTree.
 
 ####Ubuntu users:
 Please try **'sudo perl install-ubuntu.pl'** and follow the guide.
 
 ####Other users:
-Please run the script **"install.pl"** to install perl modules automatically and install raxml, mauve and beast manually and then revise the paths and parameters of them in the configure file **"Config"** manually.
+Please run the script **"install.pl"** to install perl modules automatically, which may require users to manually install RAxML, progressiveMauve(v2.3.1 is recommended) and Beast and then manually revise the path and parameters of them in the configure file **"Config"**.
 
 ####Manually install:
 Ubuntu users:
@@ -97,16 +69,16 @@ to access SaRTree environment and run SaRTree.
     Bio::AlignIO
     FindBin
     Getopt::Long
-4. Mauve v2.4.0 or later versions
+4. Mauve v2.3.1 is recommended (v2.4.0 and later versions are buggy, Mauve will be replaced by another aligner in later SaRTree version)
 5. RAxML v8.1.17 or later versions
 
 **Please run script "install.pl" to get the perl Modules by cpan while your may need to provide root permission to install some of them (try "sudo perl install.pl" if there is a "permission denied" error occured) and set up the path to dependencies software.**
 
 ###==============Optional============== (please revise the paths and parameters of them in the configure file "Config")
 
-1.bwa/bowtie (not supported now, will add them in the next version)
-2.BEAST v1.8.4 (not support BEAST 2 now, will fix in the next version)
-3.FigTree (any version, for tree viewing)
+1.bwa/bowtie (not supporting now, will add them in the next version)
+2.BEAST v1.8.4 (not supporting BEAST 2 now, will add it in the next version)
+3.FigTree (any version, for tree viewing), online tool iTOL is also recommended
 
 (All the earlier versions of the software above might be OK. We haven't tested all the early versions.)
 
