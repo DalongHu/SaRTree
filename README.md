@@ -1,7 +1,11 @@
 ------------
 ##SaRTree v1.2
 ------------
-An ideal bacterial phylogenetic tree accurately retraces evolutionary history and accurately incorporates mutational, recombination and other events on the appropriate branches. Current strain-level bacterial phylogenetic analysis based on large numbers of genomes lacks reliability and resolution, and is hard to be replicated, confirmed and reused, because of the highly divergent nature of microbial gemomes. We present SaRTree, a pipeline using six “living trees” modules, that addresses problems arising from the high numbers and variable quality of bacterial genome sequences. It provides for reuse of the tree and offers a major step towards global standardization of phylogenetic analysis by generating deposit files including all steps involved in phylogenetic inference. The tree itself is a “living tree” that can be extended by addition of more sequences, or the deposit can be used to vary the programs or parameters used, to assess the effect of such changes. This approach will allow phylogeny papers to meet the traditional responsibility of providing data and analysis that can be repeated and critically evaluated by others. SaRTree is designed for prokaryote strain-level analysis but could be adapted for other usage. 
+
+##Description:
+------------------------------------------
+An ideal bacterial phylogenetic tree accurately retraces evolutionary history and accurately incorporates mutational, recombination and other events on the appropriate branches. Current strain-level bacterial phylogenetic analysis based on large numbers of genomes lacks reliability and resolution, and is hard to be replicated, confirmed and reused, because of the highly divergent nature of microbial gemomes. We present SaRTree, a pipeline using six “living trees” modules, that addresses problems arising from the high numbers and variable quality of bacterial genome sequences. It provides for reuse of the tree and offers a major step towards global standardization of phylogenetic analysis by generating deposit files including all steps involved in phylogenetic inference. The tree itself is a “living tree” that can be extended by addition of more sequences, or the deposit can be used to vary the programs or parameters used, to assess the effect of such changes. This approach will allow phylogeny papers to meet the traditional responsibility of providing data and analysis that can be repeated and critically evaluated by others. SaRTree is designed for prokaryote strain-level analysis but could be adapted for other usage.
+
 ------------------------------------------
 
 ##Version & License:
@@ -21,6 +25,7 @@ Copyright and Contact: Dalong Hu, University of Sydney (dahu0504@uni.sydney.edu.
 ##Citation:
 ------------------------------------------
 Dalong Hu, Bin Liu, Lei Wang* and Peter R. Reeves* (2019). Living Trees: High Quality Reproducible and Reusable Construction of Bacterial Phylogenetic Trees. Molecular Biology and Evolution. (will be online soon)
+
 ------------------------------------------
 
 ##Installation:
@@ -246,8 +251,8 @@ A set of Acinetobacter baumannii genomes is included as an example in the "examp
 ###==============example commands==============
 
     cd /home/user/SaRTree-v1.2
-    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -o 307-0294
-    perl SaRTree.pl -l -i /home/user/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -u example/result/test.name.nwk -s example/result/test.snp.final.xls -m raw
+    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -c Config-example -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -o 307-0294
+    perl SaRTree.pl -l -i /home/user/SaRTree-v1.2/example/ -c Config-example -t test -f example/ACICU.fna -u example/result/test.name.nwk -s example/result/test.snp.final.xls -m raw
 
 After all processes finished, all output files for SaRTree core should be found in "example/result" directory and output files for StrainLocater in "example/query/result".
 
@@ -256,11 +261,11 @@ After all processes finished, all output files for SaRTree core should be found 
 ###==============example for manually rooting==============
 
     cd /home/user/SaRTree-v1.2
-    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -r man
+    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -c Config-example -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -r man
 
 (Then root the output tree "/home/user/SaRTree-v1.2/example/result/test.name.nwk" by hand and save the rooted tree as nwk format for example "/home/user/SaRTree-v1.2/example/test.rooted.nwk" )
 
-    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m root -r man -u /home/user/SaRTree-v1.2/example/test.rooted.nwk
+    perl SaRTree.pl -i /home/user/SaRTree-v1.2/example/ -c Config-example -t test -f example/ACICU.fna -g example/ACICU.gff -m root -r man -u /home/user/SaRTree-v1.2/example/test.rooted.nwk
 
 Then will go on the following steps. The "beast" model is similar.
 
