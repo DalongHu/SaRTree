@@ -7,7 +7,7 @@ my $fast;
 my $help;
 my $strict = 0;
 my $minCut = 0;
-my $maxCut = 2000;
+my $maxCut = 20000;
 my $stepCut = 10;
 my $alpha = 0.05;
 GetOptions (

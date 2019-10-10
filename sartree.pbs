@@ -1,0 +1,12 @@
+#!/bin/bash
+ 
+#PBS -N SaRTree
+#PBS -l nodes=1:ppn=2
+#PBS -l mem=16gb
+#PBS -l walltime=1:59:00
+#PBS -o pbs.log
+module load perl/5.28.0
+module load raxml
+cd $PBS_O_WORKDIR
+perl SaRTree.pl -i /home/z3529233/lab/dalong/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -g example/ACICU.gff -m raw -o 307-0294
+perl SaRTree.pl -l -i /home/z3529233/lab/dalong/SaRTree-v1.2/example/ -t test -f example/ACICU.fna -u example/result/test.name.nwk -s example/result/test.snp.final.xls -m raw

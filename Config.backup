@@ -1,9 +1,9 @@
-mauveBin	/srv/scratch/lanlab/dalong/mauve_2.3.1/linux-x64/progressiveMauve
+mauveBin	progressiveMauve
 mauveConfig	-
-raxMLBin	raxmlHPC-PTHREADS-AVX
+raxMLBin	raxmlHPC
 raxMLConfig	-p 12345 -# 100 -m GTRGAMMA
 raxMLBootstrap	-x 12345 -N 100
 beastBin	beast-mcmc
 beastConfig	-working -beagle_off
 treeAnnotatorConfig	-heights mean -burnin 100 -limit 0.5
-recDetectArg	-
+recDetectArg	-x 2000

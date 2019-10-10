@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-print "Installing SaRTree v1.1..\n";
+print "Installing SaRTree v1.2..\n";
 
 #perl modules
 print "Checking perl Packages..\n";
