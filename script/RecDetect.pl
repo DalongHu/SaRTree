@@ -22,7 +22,7 @@ GetOptions (
 	"fast|f!"=>\$fast,
 	"help|h!"=>\$help
 );
-my $usage = "Usage: perl $0 -s|-snp <snpList> -l|-length <seqLength> -o|-out <out(tag)> [options]\nOptions:\n-s|-snp <string> mandatory, snp list file\n-l|-length <integer> mandatory, reference genome length\n-o|-out <string> mandatory, output tag\n-t|-strict optional, run strict model to filter more recombination regions for strains with high recombination rate(default off)\n-f|-fast optional, run fast model for studies with large number of strains and SNPs, but may be less accurate(default off)\n-n|-min [integer] optional, the minimum cut threshold(default 0)\n-x|-max [integer] optional, the maximum cut threshold(default 20000)\n-p|-step [integer] optional, the adding step of cut threshold(default 10)\n-a|-alpha [float] optional, the significant threshold for ks test(default 0.05)\n-h|-help optional, show this usage\nCopyright: v6.0 Writen by Dalong Hu 23 Jan 2018 TT\n";
+my $usage = "Usage: perl $0 -s|-snp <snpList> -l|-length <seqLength> -o|-out <out(tag)> [options]\nOptions:\n-s|-snp <string> mandatory, snp list file\n-l|-length <integer> mandatory, reference genome length\n-o|-out <string> mandatory, output tag\n-t|-strict optional, run strict model to filter more recombination regions for strains with high recombination rate(default off)\n-f|-fast optional, run fast model for studies with large number of strains and SNPs, but may be less accurate(default off)\n-n|-min [integer] optional, the minimum cut threshold(default 0)\n-x|-max [integer] optional, the maximum cut threshold(default 20000)\n-p|-step [integer] optional, the adding step of cut threshold(default 10)\n-a|-alpha [float] optional, the significant threshold for ks test(default 0.05)\n-h|-help optional, show this usage\nCopyright: v6.1 Writen by Dalong Hu 7 Nov 2019 TT\n";
 if($help){
 	print $usage;
 	exit;
@@ -44,7 +44,7 @@ sub getPattern{
 	my @input=split/\t/,$input;
 	my $i=1;
 	for(my $j=0;$j<@input;$j++){
-		if($input[$j]!~/\d/){
+		if($input[$j]!~/\d/ and $input[$j] ne 'N'){
 			$input=~s/$input[$j]/$i/g;
 			$i++;
 			@input=split/\t/,$input;
@@ -52,6 +52,7 @@ sub getPattern{
 	}
 	$input=~s/\t//g;
 	$input=~tr/1234/ABCD/;
+	$input=~s/N/A/g
 	return $input;
 }
 
