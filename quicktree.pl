@@ -41,7 +41,6 @@ my $fasta = Bio::SeqIO->new(-file=>$ref,-format=>'fasta');
 my $length = $fasta->next_seq->length;
 my @samples = glob "$input/*";
 
-goto DEBUG;
 
 #Mauve alignment
 print "Alignment by Mauve\n";
@@ -140,5 +139,5 @@ else{
 }
 system"$fasttreeBin -nt -gtr -gamma < $dir/final.fasta > $dir/tree.nwk";
 print "Done\n";
-DEBUG:
+
 system"perl $Bin/script/treeview.pl -in $dir/tree.nwk -a min -b";
