@@ -24,7 +24,7 @@ Copyright and Contact: Dalong Hu, University of Sydney (dahu0504@uni.sydney.edu.
 
 ##Citation:
 ------------------------------------------
-Dalong Hu, Bin Liu, Lei Wang* and Peter R. Reeves* (2019). Living Trees: High Quality Reproducible and Reusable Construction of Bacterial Phylogenetic Trees. Molecular Biology and Evolution. (will be online soon)
+Dalong Hu, Bin Liu, Lei Wang, Peter R Reeves, Living Trees: High-Quality Reproducible and Reusable Construction of Bacterial Phylogenetic Trees, Molecular Biology and Evolution, , msz241, https://doi.org/10.1093/molbev/msz241
 
 ------------------------------------------
 
@@ -92,6 +92,14 @@ to access SaRTree environment and run SaRTree.
 
 ##Usage:
 ------------------------------------------
+###==============quicktree pipeline==============
+quicktree pipeline v1.1:
+To build a tree quickly before SaRTree V1.3 release.
+Dependcies: fasttreeMP, bioperl, mauve
+
+Usage: perl quicktree.pl -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)
+Note: Please check and revise the path in the quicktree.pl script of dependencies to fit your platform before using.
+
 
 ###==============SaRTree core==============
 
