@@ -4,7 +4,7 @@ use FindBin qw($Bin);
 use Getopt::Long;
 
 # path of depandencies (Please check and revise them before using!)
-my $mauveBin = 'progressiveMauve';# for lanlab '/srv/scratch/lanlab/dalong/mauve_2.3.1/linux-x64/progressiveMauve';
+my $mauveBin = 'progressiveMauve';
 my $fasttreeBin = 'fasttreeMP';
 
 
