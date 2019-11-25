@@ -84,7 +84,7 @@ to access SaRTree environment and run SaRTree.
 1.bwa/bowtie (not supporting now, will add them in the next version)
 2.BEAST v1.8.4 (not supporting BEAST 2 now, will add it in the next version)
 3.FigTree (any version, for tree viewing), online tool iTOL is also recommended
-
+4.fasttree (fasttreeMP version, for quicktree pipeline)
 (All the earlier versions of the software above might be OK. We haven't tested all the early versions.)
 
 ------------------------------------------
@@ -100,6 +100,10 @@ Dependcies: fasttreeMP, bioperl, mauve
 Usage: perl quicktree.pl -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)
 Note: Please check and revise the path in the quicktree.pl script of dependencies to fit your platform before using.
 
+Example:
+mkdir example/test
+perl quicktree.pl -i example/seq/ -r example/ACICU.fna -o example/test -t 4 -d
+In the output folder: The "tree.nwk" will be the output tree and the "final.fasta" will be the SNP list after recombination filtering.
 
 ###==============SaRTree core==============
 
