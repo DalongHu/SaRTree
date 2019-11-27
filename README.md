@@ -94,9 +94,9 @@ to access SaRTree environment and run SaRTree.
 ------------------------------------------
 ###==============quicktree pipeline==============
 
-quicktree pipeline v1.1:
+quicktree pipeline v1.2:
 
-To build a tree quickly before SaRTree V1.3 release.
+To quickly build a tree of thousands of strains before SaRTree V1.3 release.
 
 Dependcies: fasttreeMP, bioperl, mauve
 
