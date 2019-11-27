@@ -23,7 +23,7 @@ GetOptions(
 	"help|h!"=>\$help
 );
 unless (defined $input and defined $ref and defined $dir){
-	print "quicktree pipeline v1.1.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.1 by Dalong Hu 25/Nov/2019\n";
+	print "quicktree pipeline v1.2.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.2 by Dalong Hu 27/Nov/2019\n";
 	exit;
 }
 if(defined $thread){
@@ -114,9 +114,18 @@ if($count_thread>0){
 `perl $Bin/script/snp2reflist.pl $dir/map $dir/ref.list`;
 `perl $Bin/script/snp2fake.pl $dir/map $dir/ref.list $dir/all`;
 my @lists = sort {$a cmp $b} glob "$dir/map/*.extended";
-my $list = join " ",@lists;
-$list = "$dir/ref.list".' '.$list;
-system "paste $list>$dir/all.list";
+
+my $tmplist = "$dir/ref.list";
+my $key = 0;
+foreach my $list(@lists){
+        system "paste $tmplist $list > $dir/tmp$key.list";
+        $tmplist = "$dir/tmp$key.list";
+        $key = !$key;
+}
+system"rm $dir/tmp$key.list";
+$key = !$key;
+system"mv $dir/tmp$key.list $dir/all.list";
+
 print "List Finished\n";
 #recdetect
 if($rec){
