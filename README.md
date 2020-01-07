@@ -94,13 +94,13 @@ to access SaRTree environment and run SaRTree.
 ------------------------------------------
 ###==============quicktree pipeline==============
 
-quicktree pipeline v1.2:
+quicktree pipeline v1.3:
 
 To quickly build a tree of thousands of strains before SaRTree V1.3 release.
 
-Dependcies: fasttreeMP, bioperl, mauve
+Dependcies: fasttreeMP, bioperl, mauve and snippy
 
-Usage: perl quicktree.pl -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)
+Usage: perl quicktree.pl -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -d|-recdetect (optional, to open recdetect, default off, no parameter required) -c|-cut [proportion threshold 0-100 (optional; an SNP will be removed, if the proportion of strains, excluding ref, with N at the locus is higher than this threshold; default 20, meaning no more than 20% strains with N at any loci.)]
 
 Note: Please check and revise the path in the quicktree.pl script of dependencies to fit your platform before using.
 
@@ -108,7 +108,7 @@ Example:
 
 mkdir example/test
 
-perl quicktree.pl -i example/seq/ -r example/ACICU.fna -o example/test -t 4 -d
+perl quicktree.pl -i example/seq/ -r example/ACICU.fna -o example/test -t 4 -d -c 10
 
 In the output folder: The "tree.nwk" will be the output tree and the "final.fasta" will be the SNP list after recombination filtering.
 
