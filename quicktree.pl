@@ -4,8 +4,8 @@ use FindBin qw($Bin);
 use Getopt::Long;
 
 # path of depandencies (Please check and revise them before using!)
-my $mauveBin = 'progressiveMauve'; # for lanlab '/srv/scratch/lanlab/dalong/mauve_2.3.1/linux-x64/progressiveMauve';
-my $fasttreeBin = 'fasttreeMP'; # for lanlab 'fastatreemp';
+my $mauveBin = 'progressiveMauve'; 
+my $fasttreeBin = 'fasttreeMP'; 
 my $snippyBin = 'snippy'; 
 
 my $input;
@@ -25,7 +25,7 @@ GetOptions(
 	"help|h!"=>\$help
 );
 unless (defined $input and defined $ref and defined $dir){
-	print "quicktree pipeline v1.3.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -c|-cut [proportion threshold 0-100 (optional; an SNP will be removed, if the proportion of strains, excluding ref, with N at the locus is higher than this threshold; default 20, meaning 20%)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.3 by Dalong Hu 06/Jan/2020\n";
+	print "quicktree pipeline v1.3.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve, snippy\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -c|-cut [proportion threshold 0-100 (optional; an SNP will be removed, if the proportion of strains, excluding ref, with N at the locus is higher than this threshold; default 20, meaning 20%)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.3 by Dalong Hu 06/Jan/2020\n";
 	exit;
 }
 if(defined $thread){
