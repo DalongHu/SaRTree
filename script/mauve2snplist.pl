@@ -7,18 +7,32 @@ sub recov{
 	return $tmp;
 }
 my $mauve= shift;
+my $snippy = shift;
+my $length = shift;
 my $map = shift;
-unless(defined($mauve) and defined($map)){
-	print "Usage:perl $0 <mauve> <snplist>\nCopyright: v1.2, writed by Dalong Hu, 2019 11 11\n output snp list and gap list ~~\n";
+unless(defined $mauve and defined $snippy and defined $length and defined $map){
+	print "Usage:perl $0 <mauve> <snippy(tab)> <length(ref)> <snplist>\nCopyright: v1.4, writed by Dalong Hu, 2020 Jan 06\n output snp list and gap list ~~\n";
 	exit;
 }
+my %snippy;
+open SNP,$snippy;
+my $f = <SNP>;
+while(<SNP>){
+	my @t = split /\t/;
+	if($t[2] eq 'snp'){
+		$snippy{$t[1]} = $t[4];
+	}
+}
+close SNP;
+
 open MAUVE,"$mauve";
 open OUT,">$map";
 open GAP,">$map.gap";
-print GAP "gap";
 local $/ = undef;
 my $in = <MAUVE>;
 my @result = split /\=/,$in;
+my @gap;
+my %region;
 foreach my $result (@result){
 	$result=~s/\#[^\n]+\n//g;
 	if (($result=~/\> 1/) and ($result=~/\> 2/)){
@@ -28,6 +42,7 @@ foreach my $result (@result){
 		my $strand = $3;
 		my $refname = $4;
 		my $ref = $5;
+		$region{$start} = $end;
 		$refname=~s/.*\///;
 		$ref=~s/\n//g;
 		$ref=~tr/atgc/ATGC/;
@@ -50,12 +65,17 @@ foreach my $result (@result){
 		foreach my $base (@ref){
 			if ($base ne '-'){
 				if($seq[$i] ne '-'){
-					if($base ne $seq[$i]){
-						print OUT "$j\t$base\t$seq[$i]\n";
+					if($base ne $seq[$i] and defined $snippy{$j}){
+						if($snippy{$j} eq $seq[$i]){ #redundant to make sure this is checked. 
+							print OUT "$j\t$base\t$seq[$i]\n";
+						}
+						else{
+							print OUT "$j\t$base\t$snippy{$j}\n";;
+						}
 					}
 				}
 				else{
-					print GAP "\t$j";
+					push @gap,$j;
 				}
 				$j++;
 			}
@@ -66,3 +86,23 @@ foreach my $result (@result){
 		}
 	}
 }
+
+my $tmps = 1;
+foreach my $start (sort {$a <=> $b} keys %region){
+	if($tmps < $start){
+		for(my $i = $tmps;$i<$start;$i++){
+			push @gap,$i;
+		}
+		$tmps = $region{$start}+1;
+	}
+	else{
+		$tmps = $region{$start}+1;
+	}
+}
+if($tmps <=$length){
+	for(my $i = $tmps;$i<$length;$i++){
+		push @gap,$i;
+	}
+}
+my $gaploc = join "\t",sort {$a <=> $b} @gap;
+print GAP "$gaploc";
