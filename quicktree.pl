@@ -67,7 +67,7 @@ foreach my $sample(@samples){
 	print "Starting alignment for $name\n";
 	$i_ref++;
 	`cp $ref $ref.$i_ref.fna`;
-	$cmd .= "$mauveBin --output=$dir/mauve/$name.mauve $ref $sample"; # will support HPC in formal version
+	$cmd .= "$mauveBin --output=$dir/mauve/$name.mauve $ref.$i_ref.fna $sample"; # Fix the support for HPC use
 	if(defined $thread){
 		$cmd .= ' & ';
 		$count_thread++;
