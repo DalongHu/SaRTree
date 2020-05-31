@@ -25,7 +25,7 @@ GetOptions(
 	"help|h!"=>\$help
 );
 unless (defined $input and defined $ref and defined $dir){
-	print "quicktree pipeline v1.3.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve, snippy\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -c|-cut [proportion threshold 0-100 (optional; an SNP will be removed, if the proportion of strains, excluding ref, with N at the locus is higher than this threshold; default 20, meaning 20%)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.3 by Dalong Hu 06/Jan/2020\n";
+	print "quicktree pipeline v1.4.\nTo build a tree quickly instead of parsnp before SaRTree V1.3 release.\nDependcies: fasttree, bioperl, mauve, snippy\nUsage: perl $0 -i|-input <in(dir with fastas, no reference)> -r|-ref <reference(fasta)> -o|-out <out(empty dir)> -t|-thread [thread (optional, number of cpus to use)] -c|-cut [proportion threshold 0-100 (optional; an SNP will be removed, if the proportion of strains, excluding ref, with N at the locus is higher than this threshold; default 20, meaning 20%)] -d|-recdetect (optional, to open recdetect, default off, no parameter required)\nNote: Please check and revise the path of dependencies to fit your platform before using.\nWritten by Dalong Hu 21/Nov/2019.\nUpdated to v1.4 by Dalong Hu 31/May/2020\n";
 	exit;
 }
 if(defined $thread){
@@ -56,6 +56,7 @@ print "Alignment by Mauve\n";
 system"mkdir $dir/mauve";
 my $count_thread = 0;
 my $cmd = '';
+my $i_ref = 0;
 foreach my $sample(@samples){
 	$sample=~/([^\/]+)\.([^\.]+)$/; # make sure using suffix 'fna' or 'fasta', and using strains' names as files' names
 	my $name = $1;
@@ -64,6 +65,8 @@ foreach my $sample(@samples){
 		next;
 	}
 	print "Starting alignment for $name\n";
+	$i_ref++;
+	`cp $ref $ref.$i_ref.fna`;
 	$cmd .= "$mauveBin --output=$dir/mauve/$name.mauve $ref $sample"; # will support HPC in formal version
 	if(defined $thread){
 		$cmd .= ' & ';
@@ -72,11 +75,17 @@ foreach my $sample(@samples){
 			`$cmd`;
 			$count_thread = 0;
 			$cmd = '';
+			$i_ref = 0;
+                        `rm $ref.*.fna`;
+                        `rm $ref.*.fna.sslist`;
 		}
 	}
 	else{
 		`$cmd`;
 		$cmd = '';
+		$i_ref = 0;
+                `rm $ref.*.fna`;
+                `rm $ref.*.fna.sslist`;
 		print "Finish alignment for $name\n";
 	}
 }
@@ -84,6 +93,9 @@ if($count_thread > 0){
 	`$cmd`;
 	$count_thread = 0;
 	$cmd = '';
+	$i_ref = 0;
+        `rm $ref.*.fna`;
+        `rm $ref.*.fna.sslist`;
 }
 
 
