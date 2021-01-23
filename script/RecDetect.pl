@@ -52,7 +52,7 @@ sub getPattern{
 	}
 	$input=~s/\t//g;
 	$input=~tr/1234/ABCD/;
-	$input=~s/N/A/g
+	$input=~s/N/A/g;
 	return $input;
 }
 
